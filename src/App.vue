@@ -1,6 +1,11 @@
 <template>
   <div id="app">
     <Header></Header>
+    <div class="app-select">
+      <h2 class="app-select-title">Pick City</h2>
+      <v-select v-model="selected" :options="options"></v-select>
+    </div>
+    <p>{{selected.label}}</p>
   </div>
 </template>
 
@@ -11,7 +16,17 @@ import Header from '@/Components/Header.vue'
 export default {
   name: 'app',
   components: {
-    Header
+    Header,
+  },
+  data() {
+    return {
+      options: [
+        {id: 1, label: 'Manchaster'},
+        {id: 3, label: 'Warsaw'},
+        {id: 2, label: 'Berlin'},
+      ],
+      selected: {id: 1, label: 'Manchaster'},
+    }
   }
 }
 
@@ -33,6 +48,19 @@ export default {
 
 html, body, * {
   font-family: 'Roboto', sans-serif;
+}
+
+//V-select
+
+.app-select {
+  max-width: 400px;
+  width: 100%;
+  margin: 50px auto;
+  text-align: center;
+  &-title {
+    margin: 0 0 20px 0;
+    font-size: 20px;
+  }
 }
 
 </style>

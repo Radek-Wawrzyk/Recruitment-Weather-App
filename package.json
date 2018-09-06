@@ -10,7 +10,8 @@
     "amcharts3": "^3.21.13",
     "axios": "^0.18.0",
     "register-service-worker": "^1.0.0",
-    "vue": "^2.5.17"
+    "vue": "^2.5.17",
+    "vue-select": "^2.5.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0",
