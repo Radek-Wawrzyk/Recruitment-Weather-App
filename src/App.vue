@@ -5,7 +5,8 @@
       <h2 class="app-select-title">Pick City</h2>
       <v-select v-model="selected" :options="options"></v-select>
     </div>
-    <p>{{selected.label}}</p>
+    <p>Selected City: {{selected.label}}</p>
+    <p>Today's date: {{date}}</p>
   </div>
 </template>
 
@@ -26,7 +27,19 @@ export default {
         {id: 2, label: 'Berlin'},
       ],
       selected: {id: 1, label: 'Manchaster'},
+      date: ''
     }
+  },
+  created: function() {
+    //Get current user's date
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth()+1;
+    const day = date.getDate();
+
+    //Set Date
+    let currentDate = year + '/' + month + '/' + day;
+    this.date = currentDate;
   }
 }
 
