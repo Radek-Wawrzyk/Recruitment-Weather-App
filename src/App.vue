@@ -8,12 +8,14 @@
     <p>Selected City: {{selected.label}}</p>
     <p>Today's date: {{date}}</p>
     <p>City max and min temp: {{temp}}</p>
+    <Chart :temp="temp"></Chart>
   </div>
 </template>
 
 <script>
 
 import Header from '@/Components/Header.vue'
+import Chart from '@/Components/Chart.vue'
 import axios from 'axios'
 
 //API address
@@ -23,6 +25,7 @@ export default {
   name: 'app',
   components: {
     Header,
+    Chart
   },
   data() {
     return {

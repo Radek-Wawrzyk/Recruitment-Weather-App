@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import vSelect from 'vue-select'
+import AmCharts from 'amcharts3'
+import AmSerial from 'amcharts3/amcharts/serial'
 
 Vue.component('v-select', vSelect);
 
