@@ -2,17 +2,22 @@
   <div id="app">
     <Header></Header>
     <div class="app-select">
-      <h2 class="app-select-title">Pick City</h2>
-      <v-select v-model="selected" :options="options"></v-select>
+      <h2 class="app-select-title">Select City</h2>
+      <v-select v-model="selected" :options="options" @input="selectCity"></v-select>
     </div>
     <p>Selected City: {{selected.label}}</p>
     <p>Today's date: {{date}}</p>
+    <p>City max and min temp: {{temp}}</p>
   </div>
 </template>
 
 <script>
 
 import Header from '@/Components/Header.vue'
+import axios from 'axios'
+
+//API address
+const API = 'https://www.metaweather.com/api';
 
 export default {
   name: 'app',
@@ -26,8 +31,29 @@ export default {
         {id: 3, label: 'Warsaw'},
         {id: 2, label: 'Berlin'},
       ],
-      selected: {id: 1, label: 'Manchaster'},
-      date: ''
+      selected: '',
+      date: '',
+      temp: {
+        min: null,
+        max: null,
+      }
+    }
+  },
+  methods: {
+    selectCity() {
+      axios.get(`${API}/location/search/?query=${this.selected.label}`).then(response => {
+        console.log(response);
+        return response.data[0].woeid;
+      })
+      .then(woeid => {
+        axios.get(`${API}/location/${woeid}/${this.date}`).then(response => {
+          this.temp.max = response.data[0].max_temp;
+          this.temp.min = response.data[0].min_temp;
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      })
     }
   },
   created: function() {
