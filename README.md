@@ -21,6 +21,7 @@ Postanowiłem nie używać żadnych bibliotek, gdyż aplikacja tego nie wymagał
 ### Instalacja
 
 Wymagany jest Node.js do uruchomienia aplikacji, wystarczy ściągnąć pliki i wykonać te polecenia w terminalu.
+Ponadto trzeba wyłączyć CORS w przeglądarce by requesty API zadziałały. 
 
 ```sh
 $ npm install
