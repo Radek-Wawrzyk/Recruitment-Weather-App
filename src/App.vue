@@ -67,7 +67,12 @@ export default {
       //Init error alert
       .catch(error => {
         console.log(error);
+
         this.error = error;
+        //Set 3 seconds timer for Alert
+        setTimeout(() => {
+          this.error = null;
+        }, 3000)
       })
     },
     closeAlert() {

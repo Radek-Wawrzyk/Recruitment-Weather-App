@@ -14,14 +14,16 @@ Co jest warte uwagi, nie wykorzystałem biblioteki Select2, ze względów:
   - Vue Select nie wymagał zewnętrznych stylów do pobrania
   - Owa biblioteka jest bardziej wspierana dla Vue
   
-  
+### Umyślny błąd
+w Aplikacji specjalnie wpisałem złą nazwę dla miasta Manchester, żeby pokaż alert, który obsługuje błędy
+
 ### Własne style CSS/SCSS
 Postanowiłem nie używać żadnych bibliotek, gdyż aplikacja tego nie wymagała, proste style wystarczyły by przedstawić zakres zadania.
 
 ### Instalacja
 
 Wymagany jest Node.js do uruchomienia aplikacji, wystarczy ściągnąć pliki i wykonać te polecenia w terminalu.
-Ponadto trzeba wyłączyć CORS w przeglądarce by requesty API zadziałały. 
+Ponadto trzeba wyłączyć CORS w przeglądarce by requesty API zadziałały.
 
 ```sh
 $ npm install
