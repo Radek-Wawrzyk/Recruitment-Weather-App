@@ -76,26 +76,4 @@ export default {
 
 </script>
 
-<style lang="scss" scoped>
-
-.chart {
-  width: 100%;
-  max-width: 500px;
-  height: auto;
-  margin: 50px auto;
-}
-#chart {
-  height: 300px;
-  width: 100%;
-}
-
-//Animation
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
-
-</style>
+<style lang="scss" src="./Chart.scss" scoped />

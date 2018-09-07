@@ -18,9 +18,9 @@
 
 <script>
 
-import Header from '@/Components/Header.vue'
-import Chart from '@/Components/Chart.vue'
-import Alert from '@/Components/Alert'
+import Header from '@/Components/Header/Header.vue'
+import Chart from '@/Components/Chart/Chart.vue'
+import Alert from '@/Components/Alert/Alert.vue'
 import axios from 'axios'
 
 //API address
