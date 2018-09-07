@@ -39,6 +39,37 @@ export default {
       ],
       "dataProvider": data
     });
+  },
+  watch: {
+    temp: {
+      handler() {
+        let data = [
+          { name: "Min", value: this.temp.min },
+          { name: "Max", value: this.temp.max }
+        ]
+        AmCharts.makeChart("chart", {
+          "type": "serial",
+          "categoryField": "name",
+          "theme": "light",
+          "chartCursor": {},
+          "valueAxes": [ {
+            "gridColor": "#FFFFFF",
+            "gridAlpha": 0.2,
+            "dashLength": 0
+          } ],
+          "graphs": [
+            {
+              "type": "column",
+              "title": "Min and max temperatures",
+              "valueField": "value",
+              "fillAlphas": 0.8
+            }
+          ],
+          "dataProvider": data
+        });
+      },
+      deep: true
+    }
   }
 }
 
