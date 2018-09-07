@@ -1,14 +1,18 @@
 <template>
-  <div id="app" style="text-align: center">
+  <div id="app">
     <Header></Header>
     <div class="app-select">
       <h2 class="app-select-title">Select City</h2>
       <v-select v-model="selected" :options="options" @input="selectCity"></v-select>
     </div>
-    <p>Selected City: {{selected.label}}</p>
-    <p>Today's date: {{date}}</p>
-    <p>City max and min temp: {{temp}}</p>
+    <transition name="fade">
+      <div class="app-info" v-if="temp.min && temp.max">
+        <p>Selected City: {{selected.label}}</p>
+        <p>Today's date is {{date}}</p>
+      </div>
+    </transition>
     <Chart :temp="temp" v-if="temp.min !== null && temp.max !== null"></Chart>
+    <Alert :error="error" v-if="error" v-on:closeAlert="closeAlert"></Alert>
   </div>
 </template>
 
@@ -16,6 +20,7 @@
 
 import Header from '@/Components/Header.vue'
 import Chart from '@/Components/Chart.vue'
+import Alert from '@/Components/Alert'
 import axios from 'axios'
 
 //API address
@@ -25,12 +30,13 @@ export default {
   name: 'app',
   components: {
     Header,
-    Chart
+    Chart,
+    Alert
   },
   data() {
     return {
       options: [
-        {id: 1, label: 'Manchester'},
+        {id: 1, label: 'Manchestedd'},
         {id: 3, label: 'Warsaw'},
         {id: 2, label: 'Berlin'},
       ],
@@ -40,23 +46,32 @@ export default {
         min: null,
         max: null,
       },
+      error: null
     }
   },
   methods: {
     selectCity() {
+      //First request to get city woeid
       axios.get(`${API}/location/search/?query=${this.selected.label}`).then(response => {
-        console.log(response);
         return response.data[0].woeid;
       })
+      //Second request to get current weather
       .then(woeid => {
         axios.get(`${API}/location/${woeid}/${this.date}`).then(response => {
           this.temp.max = response.data[0].max_temp;
           this.temp.min = response.data[0].min_temp;
         });
+        //Reset error alert
+        this.error = null;
       })
+      //Init error alert
       .catch(error => {
         console.log(error);
+        this.error = error;
       })
+    },
+    closeAlert() {
+      this.error = null;
     }
   },
   created: function() {
@@ -92,6 +107,10 @@ html, body, * {
   font-family: 'Roboto', sans-serif;
 }
 
+.app-info {
+  text-align: center;
+}
+
 //V-select
 
 .app-select {
@@ -103,6 +122,15 @@ html, body, * {
     margin: 0 0 20px 0;
     font-size: 20px;
   }
+}
+
+//Animation
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 
 </style>

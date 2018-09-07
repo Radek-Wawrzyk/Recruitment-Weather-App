@@ -1,8 +1,9 @@
 <template>
-  <section class="chart">
-    <div id="chart"></div>
-    <p>{{temp}}</p>
-  </section>
+  <transition name="fade">
+    <section class="chart">
+      <div id="chart"></div>
+    </section>
+  </transition>
 </template>
 
 <script>
@@ -44,19 +45,19 @@ export default {
     temp: {
       handler() {
         let data = [
-          { name: "Min", value: this.temp.min },
-          { name: "Max", value: this.temp.max }
-        ]
+          {name: "Min", value: this.temp.min},
+          {name: "Max", value: this.temp.max}
+        ];
         AmCharts.makeChart("chart", {
           "type": "serial",
           "categoryField": "name",
           "theme": "light",
           "chartCursor": {},
-          "valueAxes": [ {
+          "valueAxes": [{
             "gridColor": "#FFFFFF",
             "gridAlpha": 0.2,
             "dashLength": 0
-          } ],
+          }],
           "graphs": [
             {
               "type": "column",
@@ -86,6 +87,15 @@ export default {
 #chart {
   height: 300px;
   width: 100%;
+}
+
+//Animation
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 
 </style>
