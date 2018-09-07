@@ -40,7 +40,7 @@ export default {
         {id: 3, label: 'Warsaw'},
         {id: 2, label: 'Berlin'},
       ],
-      selected: '',
+      selected: null,
       date: '',
       temp: {
         min: null,
