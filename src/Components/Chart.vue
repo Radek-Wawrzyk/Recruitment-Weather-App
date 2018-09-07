@@ -10,10 +10,18 @@
 export default {
   name: "Chart",
   props: ['temp'],
-  created () {
+  mounted() {
+
+    //Configure object for amChart
+    let data = [
+      { name: "Min", value: this.temp.min },
+      { name: "Max", value: this.temp.max }
+    ];
+
+    //Initialize Chart
     AmCharts.makeChart("chart", {
       "type": "serial",
-      "categoryField": "type",
+      "categoryField": "name",
       "theme": "light",
       "chartCursor": {},
       "valueAxes": [ {
@@ -24,20 +32,13 @@ export default {
       "graphs": [
         {
           "type": "column",
-          "title": "Pizza types",
-          "valueField": "sold",
+          "title": "Min and max temperatures",
+          "valueField": "value",
           "fillAlphas": 0.8
         }
       ],
-
-      "dataProvider": [
-        {"type": "Margherita", "sold": 120},
-        {"type": "Funghi", "sold": 82},
-        {"type": "Capricciosa", "sold": 78},
-        {"type": "Quattro Stagioni", "sold": 71}
-      ]
+      "dataProvider": data
     });
-    console.log("xd")
   }
 }
 

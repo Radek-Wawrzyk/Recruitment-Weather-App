@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" style="text-align: center">
     <Header></Header>
     <div class="app-select">
       <h2 class="app-select-title">Select City</h2>
@@ -8,7 +8,7 @@
     <p>Selected City: {{selected.label}}</p>
     <p>Today's date: {{date}}</p>
     <p>City max and min temp: {{temp}}</p>
-    <Chart :temp="temp"></Chart>
+    <Chart :temp="temp" v-if="temp.min !== null && temp.max !== null"></Chart>
   </div>
 </template>
 
@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       options: [
-        {id: 1, label: 'Manchaster'},
+        {id: 1, label: 'Manchester'},
         {id: 3, label: 'Warsaw'},
         {id: 2, label: 'Berlin'},
       ],
@@ -39,7 +39,7 @@ export default {
       temp: {
         min: null,
         max: null,
-      }
+      },
     }
   },
   methods: {
