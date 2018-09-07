@@ -11,15 +11,13 @@
 export default {
   name: "Chart",
   props: ['temp'],
-  data() {
-    return {
-      data: [
-        { name: "Min", value: this.temp.min },
-        { name: "Max", value: this.temp.max }
-      ]
-    }
-  },
   mounted() {
+
+    //Configure object for amChart
+    let data = [
+      { name: "Min", value: this.temp.min },
+      { name: "Max", value: this.temp.max }
+    ];
 
     //Initialize Chart
     AmCharts.makeChart("chart", {
@@ -40,12 +38,16 @@ export default {
           "fillAlphas": 0.8
         }
       ],
-      "dataProvider": this.data
+      "dataProvider": data
     });
   },
   watch: {
     temp: {
       handler() {
+        let data = [
+          {name: "Min", value: this.temp.min},
+          {name: "Max", value: this.temp.max}
+        ];
         AmCharts.makeChart("chart", {
           "type": "serial",
           "categoryField": "name",
@@ -64,7 +66,7 @@ export default {
               "fillAlphas": 0.8
             }
           ],
-          "dataProvider":  this.data
+          "dataProvider": data
         });
       },
       deep: true
